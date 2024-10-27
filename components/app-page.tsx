@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import bg from "images/bg.webp";
 
 

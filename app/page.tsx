@@ -2,84 +2,84 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import Script from 'next/script'
 
-const DumbbellAnimation: React.FC = () => {
-  const mountRef = useRef<HTMLDivElement>(null)
+// const DumbbellAnimation: React.FC = () => {
+//   const mountRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    if (!mountRef.current || typeof (window as any).THREE === 'undefined') return
+//   useEffect(() => {
+//     if (!mountRef.current || typeof (window as any).THREE === 'undefined') return
 
-    const THREE = (window as any).THREE
-    // Scene setup
-    const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-    const renderer = new THREE.WebGLRenderer({ alpha: true })
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    mountRef.current.appendChild(renderer.domElement)
+//     const THREE = (window as any).THREE
+//     // Scene setup
+//     const scene = new THREE.Scene()
+//     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+//     const renderer = new THREE.WebGLRenderer({ alpha: true })
+//     renderer.setSize(window.innerWidth, window.innerHeight)
+//     mountRef.current.appendChild(renderer.domElement)
 
-    // Create dumbbell
-    const createDumbbell = () => {
-      const group = new THREE.Group()
+//     // Create dumbbell
+//     const createDumbbell = () => {
+//       const group = new THREE.Group()
 
-      // Bar
-      const barGeometry = new THREE.CylinderGeometry(0.1, 0.1, 2, 32)
-      const barMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff }) // Blue color
-      const bar = new THREE.Mesh(barGeometry, barMaterial)
-      group.add(bar)
+//       // Bar
+//       const barGeometry = new THREE.CylinderGeometry(0.1, 0.1, 2, 32)
+//       const barMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff }) // Blue color
+//       const bar = new THREE.Mesh(barGeometry, barMaterial)
+//       group.add(bar)
 
-      // Weights
-      const weightGeometry = new THREE.CylinderGeometry(0.4, 0.4, 0.5, 32)
-      const weightMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 }) // Red color
-      const weight1 = new THREE.Mesh(weightGeometry, weightMaterial)
-      const weight2 = new THREE.Mesh(weightGeometry, weightMaterial)
-      weight1.position.y = 1
-      weight2.position.y = -1
-      group.add(weight1)
-      group.add(weight2)
+//       // Weights
+//       const weightGeometry = new THREE.CylinderGeometry(0.4, 0.4, 0.5, 32)
+//       const weightMaterial = new THREE.MeshPhongMaterial({ color: 0xff0000 }) // Red color
+//       const weight1 = new THREE.Mesh(weightGeometry, weightMaterial)
+//       const weight2 = new THREE.Mesh(weightGeometry, weightMaterial)
+//       weight1.position.y = 1
+//       weight2.position.y = -1
+//       group.add(weight1)
+//       group.add(weight2)
 
-      return group
-    }
+//       return group
+//     }
 
-    const dumbbell = createDumbbell()
-    scene.add(dumbbell)
+//     const dumbbell = createDumbbell()
+//     scene.add(dumbbell)
 
-    // Lighting
-    const light = new THREE.PointLight(0xffffff, 1, 100)
-    light.position.set(0, 0, 10)
-    scene.add(light)
+//     // Lighting
+//     const light = new THREE.PointLight(0xffffff, 1, 100)
+//     light.position.set(0, 0, 10)
+//     scene.add(light)
 
-    camera.position.z = 5
+//     camera.position.z = 5
 
-    // Animation with horizontal rotation
-    const animate = () => {
-      requestAnimationFrame(animate)
-      dumbbell.rotation.y += 0.01 // Horizontal rotation
-      dumbbell.rotation.z += 0.01
-      renderer.render(scene, camera)
-    }
-    animate()
+//     // Animation with horizontal rotation
+//     const animate = () => {
+//       requestAnimationFrame(animate)
+//       dumbbell.rotation.y += 0.01 // Horizontal rotation
+//       dumbbell.rotation.z += 0.01
+//       renderer.render(scene, camera)
+//     }
+//     animate()
 
-    // Handle resize
-    const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight
-      camera.updateProjectionMatrix()
-      renderer.setSize(window.innerWidth, window.innerHeight)
-    }
-    window.addEventListener('resize', handleResize)
+//     // Handle resize
+//     const handleResize = () => {
+//       camera.aspect = window.innerWidth / window.innerHeight
+//       camera.updateProjectionMatrix()
+//       renderer.setSize(window.innerWidth, window.innerHeight)
+//     }
+//     window.addEventListener('resize', handleResize)
 
-    // Cleanup
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      mountRef.current?.removeChild(renderer.domElement)
-    }
-  }, [])
+//     // Cleanup
+//     return () => {
+//       window.removeEventListener('resize', handleResize)
+//       mountRef.current?.removeChild(renderer.domElement)
+//     }
+//   }, [])
 
-  return (
-    <div ref={mountRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }} />
-  )
-}
+//   return (
+//     <div ref={mountRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }} />
+//   )
+// }
 
 export default function Home() {
   return (
@@ -220,30 +220,39 @@ export default function Home() {
 
         {/* Testimonials Section */}
         <section className="py-20 px-4 bg-gray-100">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-12">What Our Members Say</h2>
-            <div className="grid md:grid-cols-2 gap-12">
-              {[
-                { name: 'Alex Johnson', quote: "Joining FitHub was the best decision I've made for my health. The trainers are amazing and the community is so supportive!", avatar: '/placeholder.svg?height=100&width=100' },
-                { name: 'Maria Garcia', quote: "I've tried many gyms, but FitHub stands out. The variety of classes keeps me motivated, and I've seen incredible results.", avatar: '/placeholder.svg?height=100&width=100' },
-              ].map((testimonial, index) => (
-                <div key={index} className="bg-white rounded-lg p-6 space-y-4 shadow-md">
-                  <p className="text-gray-600 italic">"{testimonial.quote}"</p>
-                  <div className="flex items-center space-x-4">
-                    <Image
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                      width={50}
-                      height={50}
-                      className="rounded-full"
-                    />
-                    <p className="font-semibold">{testimonial.name}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+  <div className="max-w-6xl mx-auto">
+    <h2 className="text-4xl font-bold text-center mb-12">What Our Members Say</h2>
+    <div className="grid md:grid-cols-2 gap-12">
+      {[
+        {
+          name: 'Alex Johnson',
+          quote: 'Joining FitHub was the best decision I&apos;ve made for my health. The trainers are amazing and the community is so supportive!',
+          avatar: '/placeholder.svg?height=100&width=100',
+        },
+        {
+          name: 'Maria Garcia',
+          quote: 'I&apos;ve tried many gyms, but FitHub stands out. The variety of classes keeps me motivated, and I&apos;ve seen incredible results.',
+          avatar: '/placeholder.svg?height=100&width=100',
+        },
+      ].map((testimonial, index) => (
+        <div key={index} className="bg-white rounded-lg p-6 space-y-4 shadow-md">
+          <p className="text-gray-600 italic">&quot;{testimonial.quote}&quot;</p>
+          <div className="flex items-center space-x-4">
+            <Image
+              src={testimonial.avatar}
+              alt={testimonial.name}
+              width={50}
+              height={50}
+              className="rounded-full"
+            />
+            <p className="font-semibold">{testimonial.name}</p>
           </div>
-        </section>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
       </div>
     </>
   )
