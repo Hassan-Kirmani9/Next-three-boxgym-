@@ -9,9 +9,9 @@ const DumbbellAnimation: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!mountRef.current || typeof window.THREE === 'undefined') return
+    if (!mountRef.current || typeof (window as any).THREE === 'undefined') return
 
-    const THREE = window.THREE
+    const THREE = (window as any).THREE
     // Scene setup
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
